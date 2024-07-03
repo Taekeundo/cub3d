@@ -14,11 +14,11 @@
 
 //= Private =//
 
-static void mlx_exec_loop_hooks(mlx_t* mlx)
+static void	mlx_exec_loop_hooks(mlx_t*	mlx)
 {
 	const mlx_ctx_t* mlxctx = mlx->context;
 
-	mlx_list_t* lstcpy = mlxctx->hooks;
+	mlx_list_t*	lstcpy = mlxctx->hooks;
 	while (lstcpy && !glfwWindowShouldClose(mlx->window))
 	{
 		mlx_hook_t* hook = ((mlx_hook_t*)lstcpy->content);
@@ -65,7 +65,26 @@ static void mlx_render_images(mlx_t* mlx)
 	}
 }
 
-//= Public =//
+/**
+ * @brief Adds a new function to be called in the main loop.
+ * This function registers a new hook that will be called during each iteration of the main loop.
+ *
+ * @param mlx A pointer to the MLX context.
+ * @param f A pointer to the function to be called during each iteration of the main loop.
+ * @param param A pointer to the parameters that will be passed to the function.
+ *
+ * @return Returns true on success, or false on memory allocation failure.
+ *
+ * @note The function pointer @p f and the MLX context @p mlx must not be NULL.
+ *
+ * @details The function performs the following steps:
+ *  - Validates the non-nullness of the parameters.
+ *  - Allocates memory for a new hook.
+ *  - Allocates memory for a new list node.
+ *  - Assigns the function pointer and parameters to the new hook.
+ *  - Adds the new hook to the list of hooks in the MLX context.
+ *  - Returns true on successful addition, or false on memory allocation failure.
+ */
 
 bool mlx_loop_hook(mlx_t* mlx, void (*f)(void*), void* param)
 {
@@ -88,8 +107,26 @@ bool mlx_loop_hook(mlx_t* mlx, void (*f)(void*), void* param)
 	mlx_lstadd_back((mlx_list_t**)(&mlxctx->hooks), lst);
 	return (true);
 }
-
-// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+/**
+ * @brief This is the main loop for the MLX application.
+ * This function runs the main loop of the MLX application, handling rendering and event polling.
+ *
+ * @param mlx A pointer to the MLX context.
+ *
+ * @note The MLX context pointer @p mlx must not be NULL.
+ *
+ * @details The function performs the following steps:
+ *  - Validates the non-nullness of the MLX context pointer.
+ *  - Enters a loop that continues until the window is closed.
+ *  - Calculates the time difference between frames and updates the delta time in the MLX context.
+ *  - Clears the screen with a specific color.
+ *  - Retrieves the current window size and updates the MLX context.
+ *  - If the window size is greater than 1x1, updates the transformation matrix.
+ *  - Executes any registered loop hooks.
+ *  - Renders images and flushes the rendering batch.
+ *  - Swaps the front and back buffers.
+ *  - Polls for and processes events.
+ */
 void mlx_loop(mlx_t* mlx)
 {
 	MLX_NONNULL(mlx);
