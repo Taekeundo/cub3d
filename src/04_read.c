@@ -29,6 +29,12 @@ void	load_textures(t_main *cub)
 	cub->texture_alloc = true;
 }
 
+/**	[?]
+ * @brief 
+ * 
+ * @param argv 
+ * @param cub 
+ */
 void	read_subject_file(char **argv, t_main *cub)
 {
 	int	i;

@@ -50,11 +50,6 @@ void	ft_tex_paths(t_main *cub)
 	}
 }
 
-/**
- * @brief 
- * 
- * @param cub 
- */
 void	free_cub(t_main *cub)
 {
 	if ((cub->fd != -1))

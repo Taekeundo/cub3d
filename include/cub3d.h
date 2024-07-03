@@ -24,16 +24,20 @@
 # include "../libft/libft.h"				// For libft
 
 /* [ MACRO for window, speed, texture ] */
+
+
 /*	[F]
-	WIN_WIDTH, WIN_HEIGHT: 1200 * 800
+	WIN_WIDTH, WIN_HEIGHT: 1200 * 800 (User defined number)
 
-	SQRS_PER_SEC 2.0 // Distance in one second.
-	 - 1프레임당 이동할수 있는 거리
-	 - 캐릭터는 (2.0그리드/1초)만큼 거리 움직일 수 있다.
+	SQRS_PER_SEC 2.0
+	- Distance in one second.
+	- 1프레임당 이동할수 있는 거리
+	- 캐릭터는 (2.0그리드/1초)만큼 거리 움직일 수 있다.
 
-	RADS_PER_SEC 3.0 // Radians (angular measurement)
-	 - 1프레임당 움직일 수 있는 각도
-	 - 캐릭터는 (3.0그리드/1초)만큼 각도 움직일 수 있다.
+	RADS_PER_SEC 3.0
+	- Radians (angular measurement)
+	- 1프레임당 움직일 수 있는 각도
+	- 캐릭터는 (3.0그리드/1초)만큼 각도 움직일 수 있다.
 */
 # define WIN_WIDTH 1200
 # define WIN_HEIGHT 800
@@ -162,6 +166,7 @@ t_map			map;						0 // map.data_c (char **) // rows, cols
 											0 // map.c_alloc (bool)
 											0 // map.i_alloc (bool)
 
+[ dir == Black line: Direction vector ]
 t_pt2d_d		dir;						0 // dir.x (double)
 											0 // dir.y (double)
 
@@ -206,11 +211,11 @@ int				fd;							fd(= open file)
 	char			map_curr_char;			Don't need to initialize. Just update.
 
 	2-5. readmap_0.c
-	[f] set_player_pos
+	[f] set_player_pos == Green spot: Player's location.
 	t_pt2d_d		pos;					row + 0.5 // pos.x (double)
 											col + 0.5 // pos.y (double)
 		
-	[f] set_player_dir_plane
+	[f] set_player_dir_plane == Blue line
 	if (N)
 	t_pt2d_d		plane;					0		// plane.x (double)
 											-0.66	// plane.y (double)
@@ -295,7 +300,7 @@ typedef struct s_main
 	int				pitch;
 
 	t_map			map;
-	t_pt2d_d		dir;			// Black line: Direction vector.
+	t_pt2d_d		dir;
 
 	char			*filename;
 	int				total_chars_read;
@@ -312,8 +317,8 @@ typedef struct s_main
 
 	char			map_curr_char;
 
-	t_pt2d_d		pos;			// Green spot: Player's location.
-	t_pt2d_d		plane;			// Blue line: 
+	t_pt2d_d		pos;
+	t_pt2d_d		plane;
 
 	mlx_texture_t	*textures[4];
 
@@ -339,7 +344,7 @@ typedef struct s_main
 /* [ FUNCTIONS ] */
 //01_check_map
 void		check_map_command(int argc, char **argv);
-int			ft_surround_check(t_main *cub);
+int			check_surround_wall(t_main *cub);
 
 //02_print_map
 void		print_map_c(t_map *map);
