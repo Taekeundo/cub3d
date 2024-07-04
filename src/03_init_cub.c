@@ -11,21 +11,30 @@
 /* ************************************************************************** */
 #include "cub3d.h"
 
-/*	[F]
-	[ Definition ]
-	Initialize structures (t_main *cub)
-
-	[ Reference ]
-	typedef struct mlx
-	{
-		void*		window;		// window itself.
-		void*		context;	// context Abstracted opengl data.
-		int32_t		width;		// The width of the window.
-		int32_t		height;		// The height of the window.
-		double		delta_time; // The time difference between
-								// the previous frame and current time.
-	}	mlx_t;
-*/
+/**	[F]
+ * @brief 
+ * 	[ Definition ]
+ * 	Initialize structures (t_main *cub)
+ * 
+ * 	[ Reference ]
+ * 	typedef struct mlx
+ * 	{
+ * 		void*		window;		// window itself.
+ * 		void*		context;	// context Abstracted opengl data.
+ * 		int32_t		width;		// The width of the window.
+ * 		int32_t		height;		// The height of the window.
+ * 		double		delta_time; // The time difference between
+ * 								// the previous frame and current time.
+ * 	}	mlx_t;
+ * 
+ * 	[ Memo ]
+ * 	key_w,s,d,a_pressed		// Keys for 4 directions for moving.
+ * 	key_left, right_pressed	// Keys for 2 directions for rotating.
+ * 
+ * @param argc 
+ * @param argv 
+ * @param cub 
+ */
 void	init_cub(int argc, char **argv, t_main *cub)
 {
 	cub->key_w_pressed = 0;
@@ -45,17 +54,24 @@ void	init_cub(int argc, char **argv, t_main *cub)
 	cub->map.i_alloc = 0;
 	cub->dir.x = 0;
 	cub->dir.y = 0;
-	read_subject_file(argv, cub);
+	init_data_from_file(argv, cub);
 	if (argc == 3 && !ft_strcmp(argv[2], "test"))
-		print_cub_file_summary(cub);
+		display_cub_info(cub);
 }
 
+/**	[F]
+ * @brief 
+ * 	[ Definition ]
+ * 	Initialize all flags for 4 directions & floor, ceiling.
+ * 
+ * @param cub 
+ */
 void	init_fileflags(t_main *cub)
 {
 	cub->fileflags.no = 0;
 	cub->fileflags.so = 0;
 	cub->fileflags.we = 0;
 	cub->fileflags.ea = 0;
-	cub->fileflags.f = 0;
-	cub->fileflags.c = 0;
+	cub->fileflags.floor = 0;
+	cub->fileflags.ceiling = 0;
 }

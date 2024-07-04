@@ -85,7 +85,7 @@
 	bool	i_alloc;		0
 
 	2. readmap_1.c
-	[f] get_map_dims
+	[f] check_map_size
 	int		nrows;			0
 	int		ncols;			0
 	int		longest_ncols;	0
@@ -118,8 +118,8 @@ typedef struct s_fileflags
 	bool	so;
 	bool	we;
 	bool	ea;
-	bool	f;
-	bool	c;
+	bool	floor;
+	bool	ceiling;
 }	t_fileflags;
 
 /*	[F]
@@ -173,7 +173,7 @@ t_pt2d_d		dir;						0 // dir.x (double)
 ------------------------------------------------------------------------
 
 2. read.c
-[f] read_subject_file
+[f] init_data_from_file
 char			*filename;					argv[1]
 int				total_chars_read;			0
 int				fd;							fd(= open file)
@@ -183,31 +183,31 @@ int				fd;							fd(= open file)
 											0 // fileflags.so (bool)
 											0 // flieflags.we (bool)
 											0 // flieflags.ea (bool)
-											0 // flieflags.f  (bool)
-											0 // flieflags.c  (bool)
+											0 // flieflags.floor (bool)
+											0 // flieflags.ceiling (bool)
 
 	2-1. readutil.c
-	[f] read_prefixes
+	[f] parse_identifiers
 	[f] read_char
 	char			char_read;				'onechar'
 
-	[f] read_tex_prefix
-	[f] read_wall_tex_path
+	[f] parse_texture_identifier
+	[f] extract_texture_path
 	char			*tex_paths[4];			NO: 0, SO: 1, WE: 2, EA: 3
 
 	2-2. readcolor.c
-	[f] read_color_prefix
+	[f] parse_color_identifier
 	uint32_t		ceiling_color;			read_color of "F" (Floor)
 	uint32_t		floor_color;			read_color of "C" (Ceiling)
 
 	2-3. readmap_1.c
-	[f] get_map_dims
+	[f] check_map_size
 	t_map			map;					0 // map.longest_ncols (int)
 											0 // map.nrows (int)
 											0 // map.ncols (int)
 
 	2-4. readmap.c
-	[f] get_player_position
+	[f] set_player_pos_dir_plane
 	char			map_curr_char;			Don't need to initialize. Just update.
 
 	2-5. readmap_0.c
@@ -215,7 +215,7 @@ int				fd;							fd(= open file)
 	t_pt2d_d		pos;					row + 0.5 // pos.x (double)
 											col + 0.5 // pos.y (double)
 		
-	[f] set_player_dir_plane == Blue line
+	[f] set_player_dir_and_plane == Blue line
 	if (N)
 	t_pt2d_d		plane;					0		// plane.x (double)
 											-0.66	// plane.y (double)
@@ -223,7 +223,7 @@ int				fd;							fd(= open file)
 	t_pt2d_d		plane;					0		// plane.x (double)
 											0.66	// plane.y (double)
 
-	[f] set_player_dir_plane_we
+	[f] set_player_dir_and_plane_WE
 	if (W)
 	t_pt2d_d		plane;					0.66	// plane.x (double)
 											0		// plane.y (double)
@@ -347,9 +347,9 @@ void		check_map_command(int argc, char **argv);
 int			check_surround_wall(t_main *cub);
 
 //02_print_map
-void		print_map_c(t_map *map);
-void		print_map_i(t_map *map);
-void		print_cub_file_summary(t_main *cub);
+void		print_map_char(t_map *map);
+void		print_map_int(t_map *map);
+void		display_cub_info(t_main *cub);
 
 //03_init_cub
 void		init_cub(int argc, char **argv, t_main *cub);
@@ -360,30 +360,30 @@ void		init_window(t_main *cub);
 
 //04_read
 void		load_textures(t_main *cub);
-void		read_subject_file(char **argv, t_main *cub);
+void		init_data_from_file(char **argv, t_main *cub);
 
 //04_readcolor
-bool		read_color_prefix(t_main *cub, char *path);
+bool		parse_color_identifier(t_main *cub, char *path);
 
 //04_readmap_0
-void		get_player_position(t_main *cub);
+void		set_player_pos_dir_plane(t_main *cub);
 
 //04_readmap_1
-void		get_map_dims(t_main *cub);
-void		fill_map(t_main *cub);
+void		check_map_size(t_main *cub);
+void		load_and_fill_map(t_main *cub);
 
 //04_readmap_2
-void		malloc_map_i(t_main *cub);
-void		convert_map_data_c_to_i(t_main *cub);
+void		allocate_map_int(t_main *cub);
+void		convert_char_map_to_i(t_main *cub);
 
 //04_readtexture
-bool		read_tex_prefix(t_main *cub, char *path);
+bool		parse_texture_identifier(t_main *cub, char *path);
 
 //04_readutil
 void		read_char(t_main *cub);
 bool		match_char(t_main *cub, char char_to_match);
 bool		*choose_fileflag(t_main *cub, char *path);
-void		read_prefixes(t_main *cub);
+void		parse_identifiers(t_main *cub);
 
 //05_key
 void		keyhook(mlx_key_data_t keydata, void *param);

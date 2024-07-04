@@ -11,6 +11,14 @@
 /* ************************************************************************** */
 #include "cub3d.h"
 
+/** [F]
+ * @brief
+ * 	[ Definition ]
+ * 	Cpy texture from the path to the member of struct(cub->textures[i])
+ * 	If success to cpy -> change the flag of texture_alloc to the 'true'.
+ * 
+ * @param cub 
+ */
 void	load_textures(t_main *cub)
 {
 	int	i;
@@ -29,30 +37,53 @@ void	load_textures(t_main *cub)
 	cub->texture_alloc = true;
 }
 
-/**	[?]
- * @brief 
+/**	[F]
+ * @brief
+ * 	[ Definition ]
+ * 	Reads the file and sets(initialize) the necessary data for program(cub3d).
  * 
- * @param argv 
+ * 	[ Logic ]
+ * 	set up everything for executing program.
+ * 	1. Filename
+ * 	2. Total_chars_read
+ * 	3. Assign fd (open the file)
+ * 	4. Fileflags (w,e,n,s,f,c)
+ * 	5. Parse_identifiers (6 times)
+ * 		0: NO
+ * 		1: SO
+ * 		2: EA
+ * 		3: WE
+ * 		4: F
+ * 		5: C
+ * 	6. Read every chars in the maps one by one.
+ * 		= check, how many chars in the map and save it.
+ * 	7. Load the map and fill it with malloc.
+ * 	8. Set player's position, direction vector, view plane vector.
+ *  9. Convert the char type map to int type map for efficient handling.
+ * 	10. The texture appropriate for each direction
+ * 		is loaded from the path and assigned.
+ * 
+ * @param argv
  * @param cub 
  */
-void	read_subject_file(char **argv, t_main *cub)
+void	init_data_from_file(char **argv, t_main *cub)
 {
 	int	i;
 
+	i = 0;
 	cub->filename = argv[1];
 	cub->total_chars_read = 0; 
 	cub->fd = open(cub->filename, O_RDONLY);
 	if (cub->fd == -1)
 		ft_error(ERR_FILE, cub);
 	init_fileflags(cub);
-	i = 0;
 	while (i++ < 6)
-		read_prefixes(cub);
+		parse_identifiers(cub);
 	while (cub->char_read == '\n')
 		read_char(cub);
-	get_map_dims(cub);
-	fill_map(cub);
-	get_player_position(cub);
-	convert_map_data_c_to_i(cub);
+	check_map_size(cub);
+	load_and_fill_map(cub);
+	set_player_pos_dir_plane(cub);
+	convert_char_map_to_i(cub);
 	load_textures(cub);
 }
