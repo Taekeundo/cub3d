@@ -31,8 +31,10 @@ int	main(int argc, char **argv)
 
 	check_map_command(argc, argv);
 	init_cub(argc, argv, &cub);
+
+	//if (check_surround_wall(&cub))
 	//if (ft_map_surround_wall(&cub))
-	if (ft_surround_check(&cub))
+	if (check_surround_wall(&cub))
 		ft_error(ERR_MAP_WALLS, &cub);
 	if (argc == 3 && !ft_strcmp(argv[2], "test"))
 		exit(0);

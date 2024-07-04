@@ -328,7 +328,7 @@ typedef struct s_main
 /* [ FUNCTIONS ] */
 //01_check_map
 void		check_map_command(int argc, char **argv);
-int			ft_surround_check(t_main *cub);
+int			check_surround_wall(t_main *cub);
 
 //02_print_map
 void		print_map_c(t_map *map);
