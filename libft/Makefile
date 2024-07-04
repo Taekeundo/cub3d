@@ -8,21 +8,24 @@ RM		=	rm -rf
 AR		=	ar rcs
 
 # SOURCE
-SRCS		=	ft_putchar_fd.c ft_putstr_fd.c ft_putnbr_fd.c ft_putendl_fd.c \
-			ft_striteri.c ft_strlen.c ft_isalpha.c ft_isdigit.c ft_isalnum.c \
-			ft_isascii.c ft_isprint.c ft_memset.c  ft_bzero.c ft_memcpy.c \
-			ft_memmove.c ft_strlcat.c ft_tolower.c ft_toupper.c ft_strchr.c \
-			ft_strrchr.c ft_strncmp.c ft_strlcpy.c ft_memchr.c ft_memcmp.c \
-			ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c \
-			ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c \
-			ft_strcmp.c\
+SRCS		=	src/ft_putchar_fd.c src/ft_putstr_fd.c src/ft_putnbr_fd.c src/ft_putendl_fd.c \
+			src/ft_striteri.c src/ft_strlen.c src/ft_isalpha.c src/ft_isdigit.c src/ft_isalnum.c \
+			src/ft_isascii.c src/ft_isprint.c src/ft_memset.c  src/ft_bzero.c src/ft_memcpy.c \
+			src/ft_memmove.c src/ft_strlcat.c src/ft_tolower.c src/ft_toupper.c src/ft_strchr.c \
+			src/ft_strrchr.c src/ft_strncmp.c src/ft_strlcpy.c src/ft_memchr.c src/ft_memcmp.c \
+			src/ft_strnstr.c src/ft_atoi.c src/ft_calloc.c src/ft_strdup.c src/ft_substr.c \
+			src/ft_strjoin.c src/ft_strtrim.c src/ft_split.c src/ft_itoa.c src/ft_strmapi.c \
+			src/ft_strcmp.c src/ft_isspace.c \
 
-B_SRCS		=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-			ft_lstadd_back.c ft_lstdelone.c ft_lstiter.c ft_lstclear.c ft_lstmap.c \
+B_SRCS		=	src/ft_lstnew.c src/ft_lstadd_front.c src/ft_lstsize.c src/ft_lstlast.c \
+			src/ft_lstadd_back.c src/ft_lstdelone.c src/ft_lstiter.c src/ft_lstclear.c src/ft_lstmap.c \
 
+# Directory for object files
+OBJ_DIR		=	obj
 
-OBJS		=	$(SRCS:.c=.o)
-B_OBJS		=	$(B_SRCS:.c=.o)
+# Convert source file to object file and save those object lists.
+OBJS		=	$(SRCS:src/%.c=$(OBJ_DIR)/%.o)
+B_OBJS		=	$(B_SRCS:src/%.c=$(OBJ_DIR)/%.o)
 
 # MAIN COMMAND
 all:		$(NAME)
@@ -33,7 +36,12 @@ $(NAME):	$(OBJS)
 bonus:		$(OBJS) $(B_OBJS)
 		@$(AR) $(NAME) $(OBJS) $(B_OBJS)
 
-%.0:%.c		libft.h
+# Create object directory if it doesn't exist
+$(OBJ_DIR):
+		@mkdir -p $(OBJ_DIR)
+
+# Compile all (*.c) files to (*.o) files.
+$(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
 		@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
@@ -41,6 +49,7 @@ clean:
 
 fclean:		clean
 		$(RM) $(NAME)
+		$(RM) $(OBJ_DIR)
 
 re:		fclean all
 

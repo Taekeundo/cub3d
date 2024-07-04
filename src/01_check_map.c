@@ -1,16 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   01_check_map.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tkwak <tkwak@student.42berlin.de>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 10:44:35 by tkwak             #+#    #+#             */
-/*   Updated: 2024/06/06 10:44:37 by tkwak            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 #include "cub3d.h"
-
 /**
  * @brief 
  *	Check the (ac, av) condition, matching with the PDF.
@@ -28,15 +16,18 @@ void	check_map_command(int argc, char **argv)
 		ft_error(ERR_FILETYPE, NULL);
 }
 
-int	ft_sc_utils1(char **cmap, int x, int y)
+int	ft_sc_utils1(char **cmap, int y, int x)
 {
-	if (cmap[x][y] == ' ' || cmap[x][y] == '\0')
+	printf("char: y:%i x:%i |%c|\n",y, x, cmap[x][y] );
+	if (cmap[x][y] == ' ' || cmap[y][x] == '\0')
 		return (1);
 	return (0);
+
 }
 
 int	ft_sc_utils2(t_main *cub, int x, int y)
 {
+	printf("\n\n------------------Line y:%i, x:%x char: |%c|\n", x,y, cub->map.data_c[x][y]);
 	return ((ft_sc_utils1(cub->map.data_c, x + 1, y)
 			+ ft_sc_utils1(cub->map.data_c, x - 1, y)
 			+ ft_sc_utils1(cub->map.data_c, x, y + 1)
@@ -50,14 +41,15 @@ int	ft_surround_check_utils3(t_main *cub)
 	y = 0;
 	while (y < (int)ft_strlen(cub->map.data_c[0]))
 	{
-		if (cub->map.data_c[0][y] == '0')
+		if ((cub->map.data_c[0][y] != '1') && (cub->map.data_c[0][y] != ' '))
 			return (1);
 		y++;
 	}
 	y = 0;
 	while (y < (int)ft_strlen(cub->map.data_c[cub->map.nrows - 1]))
 	{
-		if (cub->map.data_c[cub->map.nrows - 1][y] == '0')
+		if ((cub->map.data_c[cub->map.nrows - 1][y] != '1') 
+			&& (cub->map.data_c[cub->map.nrows - 1][y] != ' '))
 			return (1);
 		y++;
 	}
@@ -69,11 +61,13 @@ int	ft_surround_check(t_main *cub)
 	int	x;
 	int	y;
 
+	print_char_array(cub->map.data_c);
 	if (ft_surround_check_utils3(cub))
 		return (1);
 	x = 0;
 	while (x < cub->map.nrows)
 	{
+		printf("check line: %s\n", cub->map.data_c[x]);
 		y = 0;
 		while (y < cub->map.longest_ncols)
 		{

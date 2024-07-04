@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tkwak <tkwak@student.42berlin.de>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 10:41:29 by tkwak             #+#    #+#             */
-/*   Updated: 2024/06/06 10:42:38 by tkwak            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -21,7 +10,7 @@
 # include <stdbool.h>	// bool, true, false
 # include <math.h>		// sin, cos, tan, pow, sqrt, exp, log
 # include "../MLX42/include/MLX42/MLX42.h"	// For MLX
-# include "../libft/libft.h"				// For libft
+# include "../libft/include/libft.h"		// For libft
 
 /* [ MACRO for window, speed, texture ] */
 /*	[F]
@@ -412,5 +401,11 @@ void		closehook(void *param);
 
 //end_1
 void		free_cub(t_main *cub);
+
+//utiles_test
+void		print_char_array(char **array);
+
+//010_check_map_wall
+int			ft_map_surround_wall(t_main *cub);
 
 #endif

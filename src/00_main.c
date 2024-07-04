@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   00_main.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tkwak <tkwak@student.42berlin.de>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 10:43:26 by tkwak             #+#    #+#             */
-/*   Updated: 2024/06/06 10:44:15 by tkwak            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 #include "cub3d.h"
 
 /**
@@ -42,6 +31,7 @@ int	main(int argc, char **argv)
 
 	check_map_command(argc, argv);
 	init_cub(argc, argv, &cub);
+	//if (ft_map_surround_wall(&cub))
 	if (ft_surround_check(&cub))
 		ft_error(ERR_MAP_WALLS, &cub);
 	if (argc == 3 && !ft_strcmp(argv[2], "test"))
