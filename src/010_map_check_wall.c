@@ -161,7 +161,7 @@ int	ft_map_surround_wall(t_main *cub)
 
 	row = 0;
 	new_map = create_new_map(cub);
-	while (new_map[row] && row <= cub->map.nrows)
+	while (new_map[row] && row <= cub->map.nrows + 3)
 	{
 		colum = 1;
 		while (new_map[row][colum] && colum < ft_strlen(new_map[row]) - 1)
