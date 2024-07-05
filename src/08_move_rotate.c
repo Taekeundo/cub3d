@@ -1,16 +1,20 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   08_move_rotate.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tkwak <tkwak@student.42berlin.de>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 10:47:13 by tkwak             #+#    #+#             */
-/*   Updated: 2024/06/06 10:47:27 by tkwak            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 #include "cub3d.h"
-
+/**
+ * @brief Rotates the player character left based on the current rotation speed.
+ *
+ * The new direction and plane vectors are computed using the rotation matrix:
+ * - `dir.x = dir.x * cos(rot_speed) - dir.y * sin(rot_speed)`
+ * - `dir.y = dir.x * sin(rot_speed) + dir.y * cos(rot_speed)`
+ * - `plane.x = plane.x * cos(rot_speed) - plane.y * sin(rot_speed)`
+ * - `plane.y = plane.x * sin(rot_speed) + plane.y * cos(rot_speed)`
+ * - plane is the middle of the FOV and dir the other rays
+ *
+ * @param m A pointer to the `t_main` structure that contains the current 
+ *          game state, including the player's direction, view plane, and 
+ *          rotation speed.
+ * @see t_main
+ * @see rot_speed
+ */
 void	rotate_left(t_main *m)
 {
 	double	dir_x0;
@@ -26,6 +30,22 @@ void	rotate_left(t_main *m)
 		+ m->plane.y * cos(m->rot_speed);
 }
 
+/**
+ * @brief Rotates the player character right based on the current rotation speed.
+ *
+ * The new direction and plane vectors are computed using the rotation matrix:
+ * - `dir.x = dir.x * cos(-rot_speed) - dir.y * sin(-rot_speed)`
+ * - `dir.y = dir.x * sin(-rot_speed) + dir.y * cos(-rot_speed)`
+ * - `plane.x = plane.x * cos(-rot_speed) - plane.y * sin(-rot_speed)`
+ * - `plane.y = plane.x * sin(-rot_speed) + plane.y * cos(-rot_speed)`
+ * - plane is the middle of the FOV and dir the other rays
+ *
+ * @param m A pointer to the `t_main` structure that contains the current 
+ *          game state, including the player's direction, view plane, and 
+ *          rotation speed.
+ * @see t_main
+ * @see rot_speed
+ */
 void	rotate_right(t_main *m)
 {
 	double	dir_x0;
