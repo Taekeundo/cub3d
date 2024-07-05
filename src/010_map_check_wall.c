@@ -11,6 +11,28 @@
 /* ************************************************************************** */
 #include "cub3d.h"
 
+/*	[ For testing ]
+*/
+static void	print_map_char_test(char **map)
+{
+	int	row;
+	int	col;
+
+	row = -1;
+	col = 0;
+	while (map[++row] != NULL)
+	{
+		printf("Line 	%i	|", row);
+		col = 0;
+		while (map[row][col] != '\0')
+		{
+			printf("%c", map[row][col]);
+			col++;
+		}
+		printf("|\n");
+	}
+}
+
 /**
  * @brief Copies the old map into the new map with an offset.
  *
@@ -29,12 +51,22 @@ static	int	copy_old_map_inside_new_map(char **old_map, char **new_map)
 	int	colum;
 	int	line;
 
+	print_map_char_test(old_map);
+	printf("newmapp\n");
+	print_map_char_test(new_map);
 	line = -1;
+	printf("copiLINEe:");
 	while (old_map[++line])
 	{
 		colum = -1;
+		printf("copie: |%c|", old_map[line][++colum]);
 		while (old_map[line][++colum] != '\0')
-			new_map[line + 2][colum + 2] = old_map[line][colum];
+		{
+			if (old_map[line][colum] == '\n')
+				new_map[line + 2][colum + 2] = ' ';
+			else 
+				new_map[line + 2][colum + 2] = old_map[line][colum];
+		}
 	}
 	return (0);
 }
@@ -77,20 +109,24 @@ static	char	**create_new_map(t_main *cub)
 {
 	char	**new_map;
 	int		count;
+	int		max_row;
 
-	new_map = malloc((cub->map.nrows + 5) * sizeof(char *));
+	max_row = cub->map.nrows + 6;
+	printf("num:%i \n", cub->map.nrows);
+	new_map = malloc(max_row * sizeof(char *));
 	if (!new_map)
 	{
 		perror("Failed to allocate memory for new_map");
 		return (NULL);
 	}
 	count = -1;
-	while (++count < cub->map.nrows + 4)
+	while (++count < max_row)
 	{
-		new_map[count] = creat_line_with_empty(cub->map.ncols + 5);
+		new_map[count] = creat_line_with_empty(cub->map.ncols + 4);
 		if (new_map[count] == NULL)
 			return (NULL);
 	}
+	new_map[max_row] = NULL;
 	copy_old_map_inside_new_map(cub->map.data_c, new_map);
 	return (new_map);
 }
@@ -117,7 +153,9 @@ static int	check_char(char **map, int row, int colum, int last_row)
 {
 	int	len;
 
-	if (!ft_isspace(map[row][colum + 1]) && map[row][colum + 1] != '1')
+	len = ft_strlen(map[row]);
+	if (len > (colum + 1) && !ft_isspace(map[row][colum + 1])
+		&& map[row][colum + 1] != '1')
 		return (1);
 	if (!ft_isspace(map[row][colum - 1]) && map[row][colum - 1] != '1')
 		return (1);
@@ -138,28 +176,7 @@ static int	check_char(char **map, int row, int colum, int last_row)
 	return (0);
 }
 
-/*	[ For testing ]
-*/
-static void	print_map_char_test(char **map)
-{
-	int	row;
-	int	col;
 
-	row = 0;
-	col = 0;
-	while (map[row])
-	{
-		printf("|");
-		col = 0;
-		while (map[row][col])
-		{
-			printf("%c", map[row][col]);
-			col++;
-		}
-		printf("|\n");
-		row++;
-	}
-}
 
 
 /**
@@ -185,14 +202,16 @@ int	ft_map_surround_wall(t_main *cub)
 
 	row = 0;
 	new_map = create_new_map(cub);
-	printf("ia here \n");
 	print_map_char_test(new_map);
-	while (new_map[row] && row <= cub->map.nrows + 3)
+	printf("row\n\n ");
+	while (new_map[row] && row <= cub->map.nrows + 2)
 	{
 		colum = 1;
+		printf("row %i, col: %zu char: |%c|\n ", row, colum, new_map[row][colum]);
 		while (new_map[row][colum] && colum < ft_strlen(new_map[row]) - 1)
 		{
-			if (new_map[row][colum] == ' ')
+			printf("row %i, col: %zu char: |%c|\n ", row, colum, new_map[row][colum]);
+			if (ft_isspace(new_map[row][colum]))
 			{
 				if (check_char(new_map, row, colum, cub->map.nrows + 4))
 					return (free_char_array(new_map));
@@ -200,7 +219,6 @@ int	ft_map_surround_wall(t_main *cub)
 			colum++;
 		}
 		row++;
-		printf("ia here %i \n", row);
 	}
 	free_char_array(new_map);
 	return (0);

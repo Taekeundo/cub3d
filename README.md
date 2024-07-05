@@ -2,8 +2,6 @@
   <img src="doc/pic/Fig0_head.png" alt="example of the game View">
 </p>
 
-
-
 # Project 3D mazze [Cub3d](doc/PDF/cub3D_subject.pdf)
 
 Cub3d is an immersive project offered by 42 Berlin that dives into the world of ray-casting, an essential technique in computer graphics. The main goal of the project is to create a 3D graphical representation of a maze-like environment from a 2D map, similar to the early 3D games like Wolfenstein 3D.
