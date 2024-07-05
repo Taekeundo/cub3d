@@ -134,3 +134,24 @@ void	parse_identifiers(t_main *cub)
 		return ;
 	ft_error(ERR_PREFIXES, cub);
 }
+
+/**	[F]
+ * @brief 
+ * 	[ Definition ]
+ * 	Check the type of the texture is png.
+ * 
+ * @param path 
+ * @return int 
+ */
+int	is_png_file(char *path)
+{
+	int	len;
+
+	len = ft_strlen(path);
+	if (path == NULL || len < 4)
+		return (0);
+	if (ft_strncmp(path + len - 4, ".png", 4) == 0)
+		return (1);
+	else
+		return (0);
+}

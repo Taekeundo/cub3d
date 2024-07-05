@@ -357,7 +357,7 @@ void		display_cub_info(t_main *cub);
 // static void	init_fileflags(t_main *cub);
 // static void	load_textures(t_main *cub);
 // static void	init_data_from_file(char **argv, t_main *cub);
-void		init_cub(int argc, char **argv, t_main *cub);
+void		init_cub(char **argv, t_main *cub);
 void		init_window(t_main *cub);
 
 //04_readcolor: 3EA
@@ -385,11 +385,12 @@ void		convert_char_map_to_i(t_main *cub);
 // static int	get_texture_index(char *path);
 bool		parse_texture_identifier(t_main *cub, char *path);
 
-//04_readutil: 4EA
+//04_readutil: 5EA
 void		read_char(t_main *cub);
 bool		match_char(t_main *cub, char char_to_match);
 bool		*choose_fileflag(t_main *cub, char *path);
 void		parse_identifiers(t_main *cub);
+int			is_png_file(char *path);
 
 //05_key: 4EA
 // static void	key_ws(mlx_key_data_t keydata, t_main *cub);

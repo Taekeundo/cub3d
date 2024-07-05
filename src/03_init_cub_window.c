@@ -127,9 +127,15 @@ static void	init_data_from_file(char **argv, t_main *cub)
  * 
  * @param argc 
  * @param argv 
- * @param cub 
+ * @param cub
+ * 
+ * 	[ For testing ]
+ * 	if (argc == 3 && !ft_strcmp(argv[2], "test"))
+ * 		display_cub_info(cub);
+ * 	-> must put "int argc" to the param(1) for testing.
+ * 
  */
-void	init_cub(int argc, char **argv, t_main *cub)
+void	init_cub(char **argv, t_main *cub)
 {
 	cub->key_w_pressed = 0;
 	cub->key_s_pressed = 0;
@@ -149,8 +155,6 @@ void	init_cub(int argc, char **argv, t_main *cub)
 	cub->dir.x = 0;
 	cub->dir.y = 0;
 	init_data_from_file(argv, cub);
-	if (argc == 3 && !ft_strcmp(argv[2], "test"))
-		display_cub_info(cub);
 }
 
 /**	[F]

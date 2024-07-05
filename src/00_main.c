@@ -100,6 +100,29 @@ int	main(int argc, char **argv)
 	t_main	cub;
 
 	check_user_input(argc, argv);
+	init_cub(argv, &cub);
+	// display_cub_info(&cub);
+	if (ft_map_surround_wall(&cub))
+		ft_error(ERR_MAP_WALLS, &cub);
+	init_window(&cub);
+	mlx_key_hook(cub.mlx, &keyhook, &cub);
+	mlx_close_hook(cub.mlx, &closehook, &cub);
+	mlx_loop_hook(cub.mlx, ft_raycast, &cub);
+	mlx_loop(cub.mlx);
+	mlx_terminate(cub.mlx);
+	free_cub(&cub);
+	return (0);
+}
+// ft_map_surround_wall
+/*
+	[ memo ]
+	For the testing main.
+
+int	main(int argc, char **argv)
+{
+	t_main	cub;
+
+	check_user_input(argc, argv);
 	init_cub(argc, argv, &cub);
 	if (ft_map_surround_wall(&cub))
 		ft_error(ERR_MAP_WALLS, &cub);
@@ -114,3 +137,4 @@ int	main(int argc, char **argv)
 	free_cub(&cub);
 	return (0);
 }
+*/

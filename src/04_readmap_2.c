@@ -125,6 +125,13 @@ static char	*extract_texture_path(t_main *cub)
 		read_char(cub);
 	}
 	path[i] = '\0';
+	i = 0;
+	while (i < 4)
+	{
+		if (is_png_file(&path[i]) == 0)
+			ft_error("path", cub);
+		i++;
+	}
 	return (ft_strdup(path));
 }
 
@@ -177,6 +184,11 @@ static int	get_texture_index(char *path)
  * 	5. If texture found successfully, change flags
  * 		for "tex_paths_alloc" & "chosen_fileflag".
  * 
+ * 	[ Fix for norm ]
+ * 	(Original)
+ *	if (*chosen_fileflag == 1)
+ *	 	ft_error(ERR_DUPL_TEX, cub);
+ * 
  * @param cub 
  * @param path 
  * @return true 
@@ -197,7 +209,7 @@ bool	parse_texture_identifier(t_main *cub, char *path)
 				read_char(cub);
 			chosen_fileflag = choose_fileflag(cub, path);
 			if (*chosen_fileflag == 1)
-				ft_error(ERR_DUPL_TEX, cub);
+				ft_error("Invalid file format", cub);
 			i_texture_path = get_texture_index(path);
 			cub->tex_paths[i_texture_path] = extract_texture_path(cub);
 			cub->tex_paths_alloc = true;

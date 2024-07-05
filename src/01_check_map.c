@@ -30,7 +30,7 @@ void	check_user_input(int argc, char **argv)
 {
 	int	i;
 
-	if (argc < 2 || argc > 3)
+	if (argc != 2)
 		ft_error(ERR_ARGS, NULL);
 	i = ft_strlen(argv[1]);
 	if (ft_strnstr(&argv[1][i - 4], ".cub", 4) == NULL)
