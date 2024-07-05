@@ -1,7 +1,7 @@
 
 #include "../include/libft.h"
 
-void	free_char_array(char **array)
+int	free_char_array(char **array)
 {
 	int	count;
 
@@ -11,4 +11,5 @@ void	free_char_array(char **array)
 	while ((array)[++count])
 		free((array)[count]);
 	free(array);
+	return (1);
 }

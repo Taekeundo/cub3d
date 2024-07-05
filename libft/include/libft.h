@@ -74,6 +74,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 int		ft_lstsize(t_list *lst);
 
-void	free_char_array(char **array);
+int		free_char_array(char **array);
 
 #endif
