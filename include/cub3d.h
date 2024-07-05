@@ -24,8 +24,6 @@
 # include "../libft/libft.h"				// For libft
 
 /* [ MACRO for window, speed, texture ] */
-
-
 /*	[F]
 	WIN_WIDTH, WIN_HEIGHT: 1200 * 800 (User defined number)
 
@@ -215,7 +213,7 @@ int				fd;							fd(= open file)
 	t_pt2d_d		pos;					row + 0.5 // pos.x (double)
 											col + 0.5 // pos.y (double)
 		
-	[f] set_player_dir_and_plane == Blue line
+	[f] set_player_dir_plane == Blue line
 	if (N)
 	t_pt2d_d		plane;					0		// plane.x (double)
 											-0.66	// plane.y (double)
@@ -223,7 +221,7 @@ int				fd;							fd(= open file)
 	t_pt2d_d		plane;					0		// plane.x (double)
 											0.66	// plane.y (double)
 
-	[f] set_player_dir_and_plane_WE
+	[f] set_player_dir_plane_we
 	if (W)
 	t_pt2d_d		plane;					0.66	// plane.x (double)
 											0		// plane.y (double)
@@ -342,52 +340,64 @@ typedef struct s_main
 }		t_main;
 
 /* [ FUNCTIONS ] */
-//01_check_map
-void		check_map_command(int argc, char **argv);
+//01_check_map: 5EA
+void		check_user_input(int argc, char **argv);
+// static int	check_empty_null(char **cmap, int x, int y);
+// static int	check_four_coordinates(t_main *cub, int x, int y);
+// static int	check_first_last_row(t_main *cub);
 int			check_surround_wall(t_main *cub);
 
-//02_print_map
-void		print_map_char(t_map *map);
-void		print_map_int(t_map *map);
+//02_print_map: 4EA
+// static void	print_color(int value);
+// static void	print_map_char(t_map *map);
+// static void	print_map_int(t_map *map);
 void		display_cub_info(t_main *cub);
 
-//03_init_cub
+//03_init_cub_window: 5EA
+// static void	init_fileflags(t_main *cub);
+// static void	load_textures(t_main *cub);
+// static void	init_data_from_file(char **argv, t_main *cub);
 void		init_cub(int argc, char **argv, t_main *cub);
-void		init_fileflags(t_main *cub);
-
-//03_init_window
 void		init_window(t_main *cub);
 
-//04_read
-void		load_textures(t_main *cub);
-void		init_data_from_file(char **argv, t_main *cub);
-
-//04_readcolor
+//04_readcolor: 3EA
+// static int	extract_color_from_map(t_main *cub);
+// static uint32_t	extract_color_path(t_main *cub);
 bool		parse_color_identifier(t_main *cub, char *path);
 
-//04_readmap_0
+//04_readmap_0: 4EA
+// static void	set_player_pos(t_main *cub, int row, int col, bool *flag_found);
+// static void	set_player_dir_plane_we(t_main *cub);
+// static void	set_player_dir_plane(t_main *cub);
 void		set_player_pos_dir_plane(t_main *cub);
 
-//04_readmap_1
+//04_readmap_1: 5EA
+// static void	validate_map(t_main *cub, char *onechar);
 void		check_map_size(t_main *cub);
+// static void	read_row_fill_rec_shape(t_main *cub, int row);
+// static void	allocate_map_char(t_main *cub);
 void		load_and_fill_map(t_main *cub);
 
-//04_readmap_2
-void		allocate_map_int(t_main *cub);
+//04_readmap_2: 5EA
+// static void	allocate_map_int(t_main *cub);
 void		convert_char_map_to_i(t_main *cub);
-
-//04_readtexture
+// static char	*extract_texture_path(t_main *cub);
+// static int	get_texture_index(char *path);
 bool		parse_texture_identifier(t_main *cub, char *path);
 
-//04_readutil
+//04_readutil: 4EA
 void		read_char(t_main *cub);
 bool		match_char(t_main *cub, char char_to_match);
 bool		*choose_fileflag(t_main *cub, char *path);
 void		parse_identifiers(t_main *cub);
 
-//05_key
+//05_key: 4EA
+// static void	key_ws(mlx_key_data_t keydata, t_main *cub);
+// static void	key_ad(mlx_key_data_t keydata, t_main *cub);
+// static void	key_left_right(mlx_key_data_t keydata, t_main *cub);
 void		keyhook(mlx_key_data_t keydata, void *param);
 
+/* ------------------------- RENE STARTS ------------------------- */
 //06_raycast
 void		ft_raycast(void *param);
 

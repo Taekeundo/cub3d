@@ -28,7 +28,7 @@
  * @param cub 
  * @param one 
  */
-void	validate_map(t_main *cub, char *onechar)
+static void	validate_map(t_main *cub, char *onechar)
 {
 	int	i_result_read;
 
@@ -133,7 +133,7 @@ void	check_map_size(t_main *cub)
  * @param cub 
  * @param row
  */
-void	read_row_fill_rec_shape(t_main *cub, int row)
+static void	read_row_fill_rec_shape(t_main *cub, int row)
 {
 	int		col;
 	bool	flag_eol;

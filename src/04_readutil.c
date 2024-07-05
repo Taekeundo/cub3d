@@ -102,8 +102,11 @@ bool	*choose_fileflag(t_main *cub, char *path)
  * 	Parsing (texture & color) identifier.
  * 
  * 	[ long to short ]
- * 	comparing (param) with the given info(ex) NO, SO, ... from the mendatory part.
- * 	by using the [f] parse_texture_identifier & [f] parse_color_identifier.
+ * 	comparing (param) with the given info
+ * 	(ex) NO, SO, ... from the mendatory part.
+ * 	by using the
+ * 	1. [f] parse_texture_identifier &
+ * 	2. [f] parse_color_identifier.
  * 
  * 	[ Logic ]
  * 	1. Read char one by one from the map files.

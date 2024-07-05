@@ -11,13 +11,13 @@
 /* ************************************************************************** */
 #include "cub3d.h"
 
-/**	[?]
+/**	[F]
  * @brief
  *	[ Variable ]
  *   t_main	cub			: structure, check the info in header file.
  * 
  * 	[ logic ]
- * 	1. check_map_command
+ * 	1. check_user_input
  * 	= Check the command from the user (= "user_input(argc, argv)").
  * 	= 사용자로부터 맵 명령어를 확인.
  * 
@@ -99,7 +99,7 @@ int	main(int argc, char **argv)
 {
 	t_main	cub;
 
-	check_map_command(argc, argv);
+	check_user_input(argc, argv);
 	init_cub(argc, argv, &cub);
 	if (check_surround_wall(&cub))
 		ft_error(ERR_MAP_WALLS, &cub);

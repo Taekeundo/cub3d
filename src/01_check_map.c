@@ -26,7 +26,7 @@
  * 	[ Test ]
  *  	argv[2]: For tge test (= test), else -> exit the program.
  */
-void	check_map_command(int argc, char **argv)
+void	check_user_input(int argc, char **argv)
 {
 	int	i;
 
@@ -49,7 +49,7 @@ void	check_map_command(int argc, char **argv)
  * @param y 	// position y
  * @return int
  */
-int	check_empty_null(char **cmap, int x, int y)
+static int	check_empty_null(char **cmap, int x, int y)
 {
 	if (cmap[x][y] == ' ' || cmap[x][y] == '\0')
 		return (1);
@@ -97,7 +97,7 @@ int	check_empty_null(char **cmap, int x, int y)
  * @param y 
  * @return int 
  */
-int	check_four_coordinates(t_main *cub, int x, int y)
+static int	check_four_coordinates(t_main *cub, int x, int y)
 {
 	return ((check_empty_null(cub->map.data_c, x + 1, y)
 			+ check_empty_null(cub->map.data_c, x - 1, y)
@@ -122,7 +122,7 @@ int	check_four_coordinates(t_main *cub, int x, int y)
  * @param cub 
  * @return int 
  */
-int	check_first_last_row(t_main *cub)
+static int	check_first_last_row(t_main *cub)
 {
 	int	y;
 

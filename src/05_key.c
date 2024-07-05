@@ -38,7 +38,7 @@
  * @param keydata
  * @param cub
  */
-void	keys_ws(mlx_key_data_t keydata, t_main *cub)
+static void	key_ws(mlx_key_data_t keydata, t_main *cub)
 {
 	if (keydata.key == MLX_KEY_W)
 	{
@@ -60,12 +60,12 @@ void	keys_ws(mlx_key_data_t keydata, t_main *cub)
  * @brief 
  *	[ Definition ]
  * 	Handling the 'a' and 'd' keys.
- * 	It has the same function as "keys_ws". Please note that function.
+ * 	It has the same function as "key_ws". Please note that function.
  * 
  * @param keydata
  * @param cub 
  */
-void	keys_ad(mlx_key_data_t keydata, t_main *cub)
+static void	key_ad(mlx_key_data_t keydata, t_main *cub)
 {
 	if (keydata.key == MLX_KEY_A)
 	{
@@ -87,12 +87,12 @@ void	keys_ad(mlx_key_data_t keydata, t_main *cub)
  * @brief
  * 	[ Definition ]
  * 	Handling the 'left' and 'right' keys.
- * 	It has the same function as "keys_ws". Please note that function.
+ * 	It has the same function as "key_ws". Please note that function.
  * 
  * @param keydata 
  * @param cub 
  */
-void	keys_left_right(mlx_key_data_t keydata, t_main *cub)
+static void	key_left_right(mlx_key_data_t keydata, t_main *cub)
 {
 	if (keydata.key == MLX_KEY_LEFT)
 	{
@@ -127,7 +127,7 @@ void	keys_left_right(mlx_key_data_t keydata, t_main *cub)
  * 	mlx_key_data_t
  * 		keys_t		key;
  * 		action_t	action;
- * 	= check the funtion("keys_ws")'s note.
+ * 	= check the funtion("key_ws")'s note.
  * 
  * 	[ How to proceed ]
  * 	1. new_cub = (t_main *)origin_cub;
@@ -137,7 +137,7 @@ void	keys_left_right(mlx_key_data_t keydata, t_main *cub)
  * 		in case function terminats during execution because of 'escape'.
  * 	 = Acutally don't need it but for high readability.
  * 
- * 	2. keys_ws, keys_ad, keys_left_right;
+ * 	2. key_ws, key_ad, key_left_right;
  * 	 = Update datas based on pressed button,
  *	   and save the updated data to the (*cub).
  *
@@ -153,9 +153,9 @@ void	keyhook(mlx_key_data_t keydata, void *origin_cub)
 	t_main	*new_cub;
 
 	new_cub = (t_main *)origin_cub;
-	keys_ws(keydata, origin_cub);
-	keys_ad(keydata, origin_cub);
-	keys_left_right(keydata, origin_cub);
+	key_ws(keydata, origin_cub);
+	key_ad(keydata, origin_cub);
+	key_left_right(keydata, origin_cub);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
 		mlx_terminate(new_cub->mlx);

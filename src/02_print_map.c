@@ -31,7 +31,7 @@
  * 
  * @param value 
  */
-void	print_color(int value)
+static void	print_color(int value)
 {
 	int	red;
 	int	green;
@@ -52,7 +52,7 @@ void	print_color(int value)
  * 
  * @param map 
  */
-void	print_map_char(t_map *map)
+static void	print_map_char(t_map *map)
 {
 	int	row;
 	int	col;
@@ -84,7 +84,7 @@ void	print_map_char(t_map *map)
  * 
  * @param map 
  */
-void	print_map_int(t_map *map)
+static void	print_map_int(t_map *map)
 {
 	int	row;
 	int	col;
@@ -110,11 +110,14 @@ void	print_map_int(t_map *map)
  * 	[ Definition ]
  * 	Print all about 'cub'.
  * 	
- * 	[What prints]
+ * 	[ What prints ]
  * 	1. texture paths (4ea)
  * 	2. color of floor, ceiling
  * 	3. char version map
  * 	4. int version map
+ * 
+ * 	[ Why ]
+ * 	To check more detail and for evaluation.
  * 	
  * @param cub 
  */

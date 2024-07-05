@@ -34,7 +34,7 @@
  * @param cub 
  * @return int 
  */
-int	extract_color_from_map(t_main *cub)
+static int	extract_color_from_map(t_main *cub)
 {
 	char	color[PATH_MAX];
 	int		i;
@@ -107,7 +107,7 @@ int	extract_color_from_map(t_main *cub)
  * @param cub 
  * @return uint32_t 
  */
-uint32_t	extract_color_path(t_main *cub)
+static uint32_t	extract_color_path(t_main *cub)
 {
 	int	red;
 	int	green;

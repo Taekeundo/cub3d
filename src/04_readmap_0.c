@@ -30,7 +30,7 @@
  * @param col 
  * @param flag_found 
  */
-void	set_player_pos(t_main *cub, int row, int col, bool *flag_found)
+static void	set_player_pos(t_main *cub, int row, int col, bool *flag_found)
 {
 	if (cub->map_curr_char == 'N' || cub->map_curr_char == 'S'
 		|| cub->map_curr_char == 'W' || cub->map_curr_char == 'E')
@@ -50,11 +50,11 @@ void	set_player_pos(t_main *cub, int row, int col, bool *flag_found)
  * 	= W, E방향에 대해 이동 방향과 시야의 평면을 설정하는 함수.
  *
  * 	[ Logic ]
- * 	Same logic with [f] set_player_dir_and_plane.
+ * 	Same logic with [f] set_player_dir_plane.
  * 
  * @param cub 
  */
-void	set_player_dir_and_plane_WE(t_main *cub)
+static void	set_player_dir_plane_we(t_main *cub)
 {
 	if (cub->map_curr_char == 'W')
 	{
@@ -106,7 +106,7 @@ void	set_player_dir_and_plane_WE(t_main *cub)
  * 
  * @param cub 
  */
-void	set_player_dir_and_plane(t_main *cub)
+static void	set_player_dir_plane(t_main *cub)
 {
 	if (cub->map_curr_char == 'N')
 	{
@@ -122,7 +122,7 @@ void	set_player_dir_and_plane(t_main *cub)
 		cub->plane.x = 0;
 		cub->plane.y = 0.66;
 	}
-	set_player_dir_and_plane_WE(cub);
+	set_player_dir_plane_we(cub);
 }
 
 /** [F]
@@ -148,7 +148,7 @@ void	set_player_pos_dir_plane(t_main *cub)
 		{
 			cub->map_curr_char = cub->map.data_c[row][col];
 			set_player_pos(cub, row, col, &flag_found);
-			set_player_dir_and_plane(cub);
+			set_player_dir_plane(cub);
 			col++;
 		}
 		row++;
