@@ -21,7 +21,7 @@
 # include <stdbool.h>	// bool, true, false
 # include <math.h>		// sin, cos, tan, pow, sqrt, exp, log
 # include "../MLX42/include/MLX42/MLX42.h"	// For MLX
-# include "../libft/libft.h"				// For libft
+# include "../libft/include/libft.h"				// For libft
 
 /* [ MACRO for window, speed, texture ] */
 /*	[F]
@@ -419,6 +419,9 @@ void		perform_dda(t_main *cub);
 
 //11_draw
 void		draw_tex(t_main *cub, int x);
+
+//010_map_check_wall.c 
+int			ft_map_surround_wall(t_main *cub);
 
 //end_0
 void		ft_error(char *str, t_main *cub);
