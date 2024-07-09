@@ -161,7 +161,6 @@ static void	print_map_char_test(char **map)
 	}
 }
 
-
 /**
  * @brief Checks if the given map from the structure 
  * 			t_main is surrounded by walls.
@@ -195,13 +194,13 @@ int	ft_map_surround_wall(t_main *cub)
 			if (new_map[row][colum] == ' ')
 			{
 				if (check_char(new_map, row, colum, cub->map.nrows + 4))
-					return (free_char_array(new_map));
+					return (1);//free_char_array(new_map));
 			}
 			colum++;
-		}
+		}	
 		row++;
 		printf("ia here %i \n", row);
 	}
-	free_char_array(new_map);
+	//free_char_array(new_map);
 	return (0);
 }
