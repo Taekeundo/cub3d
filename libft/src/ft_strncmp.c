@@ -24,7 +24,6 @@ int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {
 	size_t	i;
 
-	printf ("str1: %s, str2: %s\n", str1, str2);
 	i = 0;
 	if (!n)
 		return (0);

@@ -224,7 +224,6 @@ bool	parse_texture_identifier(t_main *cub, char *path)
 	bool	*chosen_fileflag;
 
 	i_texture_path = 0;
-	chosen_fileflag = NULL;
 	if (match_char(cub, path[0]))
 	{
 		read_char(cub);
@@ -235,12 +234,7 @@ bool	parse_texture_identifier(t_main *cub, char *path)
 				read_char(cub);
 			chosen_fileflag = choose_fileflag(cub, path);
 			if (*chosen_fileflag == 1)
-			{
-				// test
-				// printf("\ttest\n");
-				cub->tex_paths[i_texture_path] = NULL;
 				ft_error("Invalid file format", cub);
-			}
 			i_texture_path = get_texture_index(path);
 			cub->tex_paths[i_texture_path] = extract_texture_path(cub);
 			cub->tex_paths_alloc = true;
@@ -252,4 +246,3 @@ bool	parse_texture_identifier(t_main *cub, char *path)
 	}
 	return (0);
 }
-

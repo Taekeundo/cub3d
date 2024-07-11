@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   010_map_check_wall.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkwak <tkwak@student.42berlin.de>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/11 14:18:34 by tkwak             #+#    #+#             */
+/*   Updated: 2024/07/11 14:18:36 by tkwak            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 /*	[ For testing ]
@@ -40,15 +52,10 @@ static	int	copy_old_map_inside_new_map(char **old_map, char **new_map)
 	int	colum;
 	int	line;
 
-	// print_map_char_test(old_map);
-	// printf("newmapp\n");
-	// print_map_char_test(new_map);
-	// printf("newmapp end\n");
 	line = -1;
 	while (old_map[++line])
 	{
 		colum = -1;
-		//printf("copie: |%c|", old_map[line][++colum]);
 		while (old_map[line][++colum] != '\0')
 		{
 			if (old_map[line][colum] == '\n')
@@ -101,7 +108,6 @@ static	char	**create_new_map(t_main *cub)
 	int		max_row;
 
 	max_row = cub->map.nrows + 4;
-	// printf("num:%i \n", cub->map.nrows);
 	new_map = malloc((max_row + 1) * sizeof(char *));
 	if (!new_map)
 	{
@@ -170,9 +176,6 @@ static int	check_char(char **map, int row, int colum, int last_row)
 	return (0);
 }
 
-
-
-
 /**
  * @brief Checks if the given map from the structure 
  * 			t_main is surrounded by walls.
@@ -198,24 +201,15 @@ int	ft_map_surround_wall(t_main *cub)
 	new_map = create_new_map(cub);
 	if (!new_map)
 		return (1);
-	// /* Test */
-	// print_map_char_test(cub->map.data_c);
-	// printf("------------\n");	
-	// print_map_char_test(new_map);
-	// printf("row\n\n ");
-	// /* Test */
 	while (new_map[row] && row <= cub->map.nrows + 2)
 	{
 		colum = 1;
-		//printf("row %i, col: %zu char: |%c|\n ", row, colum, new_map[row][colum]);
 		while (new_map[row][colum] && colum < ft_strlen(new_map[row]) - 1)
 		{
-			//printf("row %i, col: %zu char: |%c|\n ", row, colum, new_map[row][colum]);
 			if (ft_isspace(new_map[row][colum]))
 			{
 				if (check_char(new_map, row, colum, cub->map.nrows + 4))
 				{
-					// printf("\n\nchar: |%c| row: %i, col: %li\n\n", new_map[row][colum], row, colum);
 					free_char_array(new_map);
 					return (1);
 				}

@@ -137,6 +137,9 @@ static void	init_data_from_file(char **argv, t_main *cub)
  */
 void	init_cub(char **argv, t_main *cub)
 {
+	int	i;
+
+	i = -1;
 	cub->key_w_pressed = 0;
 	cub->key_s_pressed = 0;
 	cub->key_a_pressed = 0;
@@ -154,12 +157,8 @@ void	init_cub(char **argv, t_main *cub)
 	cub->map.i_alloc = 0;
 	cub->dir.x = 0;
 	cub->dir.y = 0;
-	int i = 0;
-	while (i < 4)
-	{
+	while (++i < 4)
 		cub->tex_paths[i] = NULL;
-		i++;
-	}
 	init_data_from_file(argv, cub);
 }
 
