@@ -110,10 +110,7 @@ static	char	**create_new_map(t_main *cub)
 	max_row = cub->map.nrows + 4;
 	new_map = malloc((max_row + 1) * sizeof(char *));
 	if (!new_map)
-	{
-		perror("Failed to allocate memory for new_map");
 		return (NULL);
-	}
 	count = -1;
 	while (++count < max_row)
 	{
@@ -209,10 +206,7 @@ int	ft_map_surround_wall(t_main *cub)
 			if (ft_isspace(new_map[row][colum]))
 			{
 				if (check_char(new_map, row, colum, cub->map.nrows + 4))
-				{
-					free_char_array(new_map);
-					return (1);
-				}
+					return (free_char_array(new_map));
 			}
 			colum++;
 		}
