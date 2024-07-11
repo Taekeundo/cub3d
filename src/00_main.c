@@ -90,6 +90,9 @@
  * 	= 프로그램 종료되면 자원 해제 및 mlx종료
  *  = mlx사용이 끝나면 꼭 써줘야 하는 기능.
  *  = 구조체의 할당되었던 모든 메모리 해제.
+ * 
+ * 	[ Memo ]
+ *  display_cub_info(&cub);
  * 	
  * @param argc
  * @param argv
@@ -101,7 +104,6 @@ int	main(int argc, char **argv)
 
 	check_user_input(argc, argv);
 	init_cub(argv, &cub);
-	// display_cub_info(&cub);
 	if (ft_map_surround_wall(&cub))
 		ft_error(ERR_MAP_WALLS, &cub);
 	init_window(&cub);

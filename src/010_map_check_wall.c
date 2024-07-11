@@ -1,7 +1,6 @@
 #include "cub3d.h"
 
 /*	[ For testing ]
-*/
 static void	print_map_char_test(char **map)
 {
 	int	row;
@@ -21,6 +20,7 @@ static void	print_map_char_test(char **map)
 		printf("|\n");
 	}
 }
+*/
 
 /**
  * @brief Copies the old map into the new map with an offset.
@@ -101,7 +101,7 @@ static	char	**create_new_map(t_main *cub)
 	int		max_row;
 
 	max_row = cub->map.nrows + 4;
-	printf("num:%i \n", cub->map.nrows);
+	// printf("num:%i \n", cub->map.nrows);
 	new_map = malloc((max_row + 1) * sizeof(char *));
 	if (!new_map)
 	{
@@ -198,8 +198,12 @@ int	ft_map_surround_wall(t_main *cub)
 	new_map = create_new_map(cub);
 	if (!new_map)
 		return (1);
-	print_map_char_test(new_map);
-	printf("row\n\n ");
+	// /* Test */
+	// print_map_char_test(cub->map.data_c);
+	// printf("------------\n");	
+	// print_map_char_test(new_map);
+	// printf("row\n\n ");
+	// /* Test */
 	while (new_map[row] && row <= cub->map.nrows + 2)
 	{
 		colum = 1;
@@ -211,7 +215,7 @@ int	ft_map_surround_wall(t_main *cub)
 			{
 				if (check_char(new_map, row, colum, cub->map.nrows + 4))
 				{
-					printf("\n\nchar: |%c| row: %i, col: %li\n\n", new_map[row][colum], row, colum);
+					// printf("\n\nchar: |%c| row: %i, col: %li\n\n", new_map[row][colum], row, colum);
 					free_char_array(new_map);
 					return (1);
 				}

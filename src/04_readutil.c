@@ -38,7 +38,10 @@ void	read_char(t_main *cub)
 
 	n_chars_read = read(cub->fd, &one, 1);
 	if (n_chars_read < 1)
+	{
+		// printf("\ttesttest\n");
 		ft_error(ERR_READ, cub);
+	}
 	cub->total_chars_read += n_chars_read;
 	cub->char_read = one;
 }
@@ -94,6 +97,20 @@ bool	*choose_fileflag(t_main *cub, char *path)
 	if (!ft_strcmp(path, "C"))
 		return (&cub->fileflags.ceiling);
 	return (NULL);
+}
+
+int	ft_check_texture(t_main *cub)
+{
+	printf("cub->map.data_c[0]: |%s|\n", cub->map.data_c[0]);
+	if (ft_strncmp(cub->map.data_c[0], "NO", 2))
+			// strncmp(cub->map.data_c[1], "SO", 2) ||
+			// strncmp(cub->map.data_c[2], "WE", 2) ||
+			// strncmp(cub->map.data_c[3], "EA", 2))
+	{
+		return (1);
+	}
+	else
+		return (0);
 }
 
 /** [F]

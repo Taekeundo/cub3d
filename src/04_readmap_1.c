@@ -139,8 +139,9 @@ static void	read_row_fill_rec_shape(t_main *cub, int row)
 	bool	flag_eol;
 	char	one;
 
-	flag_eol = 0;
 	col = 0;
+	flag_eol = 0;
+	one = 'a';
 	while (col < cub->map.ncols)
 	{
 		if (flag_eol == 0)

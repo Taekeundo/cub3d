@@ -42,10 +42,21 @@ void	ft_tex_paths(t_main *cub)
 	int	n;
 
 	n = 0;
+	// printf("R we now in ft_tex_paths?\n");
+	// printf("cub->tex_paths[0]: |%s|\n", cub->tex_paths[0]);
 	while (n < NUM_TEXTURES)
 	{
-		if (cub->tex_paths[n])
+		// printf("cub->tex_paths[%d]: |%s|\n", n, cub->tex_paths[n]);
+	
+		if (cub->tex_paths[n] != NULL)
+		{
+			printf("cub->tex_paths[%d]: |%s|\n", n, cub->tex_paths[n]);
 			free(cub->tex_paths[n]);
+		}
+		// else
+		// {
+		// 	exit(1);
+		// }
 		n++;
 	}
 }
@@ -53,13 +64,28 @@ void	ft_tex_paths(t_main *cub)
 void	free_cub(t_main *cub)
 {
 	if ((cub->fd != -1))
+	{
+		printf("1. inside\n");
 		close(cub->fd);
+	}
 	if (cub->texture_alloc == true)
+	{
+		printf("2. inside\n");
 		delete_textures(cub);
+	}
 	if (cub->map.c_alloc == 1)
+	{
+		printf("3. inside\n");
 		free_map_c(&cub->map);
+	}
 	if (cub->map.i_alloc == 1)
+	{
+		printf("4. inside\n");
 		free_map_i(&cub->map);
+	}
 	if (cub->tex_paths_alloc == true)
+	{
+		printf("5. inside\n");
 		ft_tex_paths(cub);
+	}
 }

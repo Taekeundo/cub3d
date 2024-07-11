@@ -166,6 +166,7 @@ static int	get_texture_index(char *path)
  * 		with the cub->char_read by using the [f]match_char.
  * 		// while (cub->char_read == ' ')
  * 		= ex) NO' ' // currently read until here.
+ *
  * 	2. chosen_fileflag = choose_fileflag(cub, path);
  * 		Check, loaded texts match in which fileflags (no, so, we, ea, f, c)
  * 		by using [f] choose_fileflag.
@@ -173,6 +174,7 @@ static int	get_texture_index(char *path)
  * 		2-1. if (*chosen_fileflag == 1)
  * 			Already certain fileflag is assigned. (ex) flieflag.no = 1.
  * 			= Prevent duplication.
+ *
  * 	3. get_texture_index(path);
  * 		Check which texture it is and save it to 'i_texture_path'.
  * 		0	: NO
@@ -180,7 +182,9 @@ static int	get_texture_index(char *path)
  * 		2	: WE
  * 		3	: EA
  * 		-1	: else
+ *
  * 	4. Save the path of current texture to the tex_paths[i_texture_path].
+ *
  * 	5. If texture found successfully, change flags
  * 		for "tex_paths_alloc" & "chosen_fileflag".
  * 
@@ -194,22 +198,49 @@ static int	get_texture_index(char *path)
  * @return true 
  * @return false 
  */
+// static void	print_map_char_test_1(char **map)
+// {
+// 	int	row;
+// 	int	col;
+
+// 	row = -1;
+// 	col = 0;
+// 	while (map[++row] != NULL)
+// 	{
+// 		printf("Line 	%i	|", row);
+// 		col = 0;
+// 		while (map[row][col] != '\0')
+// 		{
+// 			printf("%c", map[row][col]);
+// 			col++;
+// 		}
+// 		printf("|\n");
+// 	}
+// }
+
 bool	parse_texture_identifier(t_main *cub, char *path)
 {
-	bool	*chosen_fileflag;
 	int		i_texture_path;
+	bool	*chosen_fileflag;
 
+	i_texture_path = 0;
+	chosen_fileflag = NULL;
 	if (match_char(cub, path[0]))
 	{
 		read_char(cub);
 		if (match_char(cub, path[1]))
 		{
 			read_char(cub);
-			while (cub->char_read == ' ')
+			while (ft_isspace(cub->char_read))
 				read_char(cub);
 			chosen_fileflag = choose_fileflag(cub, path);
 			if (*chosen_fileflag == 1)
+			{
+				// test
+				// printf("\ttest\n");
+				cub->tex_paths[i_texture_path] = NULL;
 				ft_error("Invalid file format", cub);
+			}
 			i_texture_path = get_texture_index(path);
 			cub->tex_paths[i_texture_path] = extract_texture_path(cub);
 			cub->tex_paths_alloc = true;
@@ -221,3 +252,4 @@ bool	parse_texture_identifier(t_main *cub, char *path)
 	}
 	return (0);
 }
+
